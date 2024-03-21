@@ -11,6 +11,3 @@
    
 ---
 &copy; Copyright 2024 OA 
-
-
-
