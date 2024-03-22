@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProjectInit.Core.Context;
 using ProjectInit.Core.Entities;
+using ProjectInit.Repositories.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ProjectContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>));
+
+
 
 var app = builder.Build();
 

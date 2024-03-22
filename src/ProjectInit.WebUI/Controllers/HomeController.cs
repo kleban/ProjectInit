@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjectInit.Core.Entities;
+using ProjectInit.Repositories.Common;
+using ProjectInit.Repositories.Projects;
 using ProjectInit.WebUI.Models;
 using System.Diagnostics;
 
@@ -7,15 +10,17 @@ namespace ProjectInit.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IRepository<Project, Guid> repository;
+        public HomeController(ILogger<HomeController> logger,
+            IRepository<Project, Guid> repository)
         {
             _logger = logger;
+            this.repository = repository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(repository.GetAllAsync());
         }
 
         public IActionResult Privacy()

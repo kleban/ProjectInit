@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectInit.Core.Entities
 {
-    public class User : IdentityUser, IEntity<string>
+    public class User : IdentityUser<Guid>, IEntity<Guid>
     {
         public string? FullName { get; set; }
         public virtual ICollection<Project> TeacherProjects { get; set; } = new HashSet<Project>();

@@ -10,8 +10,8 @@
 4. Додати connection string до appsettings.json.
 5. Перемістити DataContext до Core.
 6. Провести міграцію БД.
-
 7. Додати сутності Project, User, зв'язати правильно їх.
+
 8. Написати базові репозиторії.
 9. DI
 10. Seed
