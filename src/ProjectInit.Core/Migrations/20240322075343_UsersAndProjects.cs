@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectInit.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class UsersAndProjects : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,7 @@ namespace ProjectInit.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -156,6 +157,68 @@ namespace ProjectInit.Core.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CourseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_AspNetUsers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentsProjects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentsProjects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentsProjects_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentsProjectUser",
+                columns: table => new
+                {
+                    StudentProjectsId = table.Column<int>(type: "int", nullable: false),
+                    StudentsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentsProjectUser", x => new { x.StudentProjectsId, x.StudentsId });
+                    table.ForeignKey(
+                        name: "FK_StudentsProjectUser_AspNetUsers_StudentsId",
+                        column: x => x.StudentsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_StudentsProjectUser_StudentsProjects_StudentProjectsId",
+                        column: x => x.StudentProjectsId,
+                        principalTable: "StudentsProjects",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +257,21 @@ namespace ProjectInit.Core.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_TeacherId",
+                table: "Projects",
+                column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentsProjects_ProjectId",
+                table: "StudentsProjects",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentsProjectUser_StudentsId",
+                table: "StudentsProjectUser",
+                column: "StudentsId");
         }
 
         /// <inheritdoc />
@@ -215,7 +293,16 @@ namespace ProjectInit.Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "StudentsProjectUser");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "StudentsProjects");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
