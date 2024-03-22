@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ProjectInit.Core\ProjectInit.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Project\" />
+  </ItemGroup>
+
 </Project>
