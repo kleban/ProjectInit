@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectInit.Core.Entities
 {
-    public class StudentsProject : IEntity<int>
+    public class ProjectItem : IEntity<int>
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; } 
@@ -19,5 +19,12 @@ namespace ProjectInit.Core.Entities
         [ForeignKey(nameof(Project))]
         public Guid ProjectId { get; set; }
         public virtual ICollection<User> Students { get; set; } = new HashSet<User>();
+
+        public DateTime StatusDate { get; set; } = DateTime.Now;
+
+        public ProjectItemStatus Status { get; set; }
+
+        [ForeignKey(nameof(Status))]
+        public int StatusId { get; set; } = 1;
     }
 }

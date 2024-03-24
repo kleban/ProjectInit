@@ -15,7 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ProjectContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>));
+builder.Services.AddRepositories();
 
 
 

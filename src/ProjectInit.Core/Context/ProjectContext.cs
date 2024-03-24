@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace ProjectInit.Core.Context
 {
-    public class ProjectContext : IdentityDbContext<User>
+    public class ProjectContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public ProjectContext(DbContextOptions<ProjectContext> options)
             : base(options)
@@ -16,20 +16,15 @@ namespace ProjectInit.Core.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
            builder
-                .Entity<StudentsProject>()
+                .Entity<ProjectItem>()
                 .HasMany(x => x.Students)
                 .WithMany(x=> x.StudentProjects);
-
-            /////////////
-            foreach (var foreignKey in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                foreignKey.DeleteBehavior = DeleteBehavior.NoAction;
-            }
 
             base.OnModelCreating(builder);
         }
 
         public DbSet<Project> Projects => Set<Project>();
-        public DbSet<StudentsProject> StudentsProjects => Set<StudentsProject>();
+        public DbSet<ProjectItem> ProjectItems => Set<ProjectItem>();
+        public DbSet<ProjectItemStatus> ProjectItemStatuses => Set<ProjectItemStatus>();
     }
 }

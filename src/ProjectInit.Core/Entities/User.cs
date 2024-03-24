@@ -11,6 +11,6 @@ namespace ProjectInit.Core.Entities
     {
         public string? FullName { get; set; }
         public virtual ICollection<Project> TeacherProjects { get; set; } = new HashSet<Project>();
-        public virtual ICollection<StudentsProject> StudentProjects { get; set; } = new HashSet<StudentsProject>();
+        public virtual ICollection<ProjectItem> StudentProjects { get; set; } = new HashSet<ProjectItem>();
     }
 }
