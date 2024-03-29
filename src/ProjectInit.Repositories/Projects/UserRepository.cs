@@ -1,4 +1,5 @@
-﻿using ProjectInit.Core.Entities;
+﻿using ProjectInit.Core.Context;
+using ProjectInit.Core.Entities;
 using ProjectInit.Repositories.Common;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace ProjectInit.Repositories.Projects
 {
-    public interface IProjectRepository : IRepository<Project, Guid>
+    public class UserRepository : Repository<User, Guid>, IUserRepository
     {
-
+        public UserRepository(ProjectContext ctx) : base(ctx) {}
     }
 }

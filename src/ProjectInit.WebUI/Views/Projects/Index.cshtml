@@ -1,0 +1,37 @@
+﻿@using ProjectInit.Core.Entities
+@model List<Project>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a href="/projects/create" class="btn btn-success float-end">Додати курс</a>
+
+<h1>Index</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <th>Назва курсу та проєкту</th>
+        <th>Статус</th>
+        <th></th>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>
+                    Курс: <strong>@p.CourseName</strong><br />
+                    Проєкт: <strong>@p.ProjectName</strong>
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    <a href="/projects/details/@p.Id" class="btn btn-primary">Детально</a>
+                    <a href="/projects/edit/@p.Id" class="btn btn-warning">Редагувати</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

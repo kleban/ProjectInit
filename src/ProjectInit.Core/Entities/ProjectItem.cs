@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProjectInit.Core.Entities
 {
-    public class ProjectItem : IEntity<int>
+    public class ProjectItem : IEntity<Guid>
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } 
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string? Title { get; set; }
         public string? Description { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
@@ -26,5 +25,7 @@ namespace ProjectInit.Core.Entities
 
         [ForeignKey(nameof(Status))]
         public int StatusId { get; set; } = 1;
+        public virtual ICollection<ProjectApproveQuery> ApproveQueries { get; set; } = new HashSet<ProjectApproveQuery>();
+        public virtual ICollection<ProjectAccessQuery> AccessQueries { get; set; } = new HashSet<ProjectAccessQuery>();
     }
 }

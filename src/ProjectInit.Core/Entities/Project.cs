@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,8 +20,11 @@ namespace ProjectInit.Core.Entities
         public bool IsActive { get; set; }
         public User? Teacher { get; set; }
 
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
+
         [ForeignKey(nameof(Teacher))]
-        public Guid TeacherId { get; set; }
+        public Guid? TeacherId { get; set; }
         public virtual ICollection<ProjectItem> Items { get; set; } = new HashSet<ProjectItem>();
         public virtual ICollection<ProjectLink> Links { get; set; } = new HashSet<ProjectLink>();
     }

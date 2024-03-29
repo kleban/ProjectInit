@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectInit.Repositories.Projects
 {
-    public interface IProjectRepository : IRepository<Project, Guid>
+    public interface IUserRepository : IRepository<User, Guid>
     {
-
     }
 }
