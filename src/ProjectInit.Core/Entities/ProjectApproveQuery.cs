@@ -19,5 +19,10 @@ namespace ProjectInit.Core.Entities
         [ForeignKey(nameof(ProjectItem))]
         public Guid ProjectItemId { get; set; }
 
+        //public ProjectItemStatus? Status { get; set; }
+
+        //[ForeignKey(nameof(Status))]
+       // public int StatusId { get; set; } = 1;
+
     }
 }

@@ -52,10 +52,6 @@ namespace ProjectInit.Core.Context
             builder.Entity<User>()
                 .HasData(teacher, teacher2);
 
-
-
-
-
             return teacherId;
         }
 
@@ -104,17 +100,17 @@ namespace ProjectInit.Core.Context
             builder.Entity<ProjectItemStatus>().HasData(
                 new List<ProjectItemStatus> { new ProjectItemStatus
                 {
-                    Id = 1,
+                    Id = (int)StatusType.Draft,
                     Title = "Чернетка"
                 },
                 new ProjectItemStatus
                 {
-                    Id = 2,
+                    Id = (int)StatusType.Rejected,
                     Title = "Відхилено"
                 },
                 new ProjectItemStatus
                 {
-                    Id = 3,
+                    Id = (int)StatusType.Approved,
                     Title = "Затверджено"
                 }});
         }

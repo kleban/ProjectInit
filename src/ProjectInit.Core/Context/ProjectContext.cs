@@ -20,6 +20,7 @@ namespace ProjectInit.Core.Context
                 .Entity<ProjectItem>()
                 .HasMany(x => x.Students)
                 .WithMany(x=> x.StudentProjects);
+
             builder.Seed();
 
             base.OnModelCreating(builder);

@@ -2,19 +2,23 @@
 @model List<Project>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Список проєктів";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <a href="/projects/create" class="btn btn-success float-end">Додати курс</a>
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <table class="table table-bordered">
     <thead>
-        <th>Назва курсу та проєкту</th>
-        <th>Статус</th>
-        <th></th>
+        <tr>
+            <th>Назва курсу та проєкту</th>
+            <th>Статус</th>
+            <th>Групи</th>
+            <th>Інше</th>
+            <th>Дії</th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var p in Model)
@@ -22,10 +26,23 @@
             <tr>
                 <td>
                     Курс: <strong>@p.CourseName</strong><br />
-                    Проєкт: <strong>@p.ProjectName</strong>
+                    Проєкт: <strong>@p.ProjectName</strong><br />
+                    <strong>@p.Teacher.FullName</strong>
                 </td>
                 <td>
-                    
+                    @if (p.IsActive)
+                    {
+                        <span class="text-success"><i class="fa-solid fa-lock-open"></i>&nbsp;Відкритий</span>
+                    }
+                    else
+                    {
+                        <span><i class="fa-solid fa-lock-close"></i>&nbsp;Закритий</span>
+                    }
+                </td>
+                <td>@p.Groups</td>
+                <td>
+                    Лінки: <strong>@p.Links.Count()</strong><br />
+                    Теми: <strong>@p.Items.Count()</strong>
                 </td>
                 <td>
                     <a href="/projects/details/@p.Id" class="btn btn-primary">Детально</a>

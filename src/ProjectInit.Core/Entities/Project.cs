@@ -14,17 +14,17 @@ namespace ProjectInit.Core.Entities
         public string? CourseName { get; set; } = string.Empty;
         public string? ProjectName { get; set; } = string.Empty;
         public string? Groups { get; set; } = string.Empty;
-        public string? ImagePath {  get; set; } = "/img/no_photo.jpg";
+        public string? ImagePath {  get; set; } = "/img/projects/no_photo.jpg";
         public DateTime? TitleApproveDeadline { get; set; } = DateTime.Now.AddDays(1);
         public DateTime? FinishDeadline { get; set; } = DateTime.Now.AddDays(10);
         public bool IsActive { get; set; }
         public User? Teacher { get; set; }
 
-        [NotMapped]
-        public IFormFile? ImageFile { get; set; }
-
         [ForeignKey(nameof(Teacher))]
         public Guid? TeacherId { get; set; }
+
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
         public virtual ICollection<ProjectItem> Items { get; set; } = new HashSet<ProjectItem>();
         public virtual ICollection<ProjectLink> Links { get; set; } = new HashSet<ProjectLink>();
     }

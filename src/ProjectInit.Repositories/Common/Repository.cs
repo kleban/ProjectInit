@@ -13,15 +13,16 @@ namespace ProjectInit.Repositories.Common
        where TEntity : class, IEntity<TKey>
     {
         protected ProjectContext _ctx;
-        protected DbSet<TEntity> dbSet;
+        //protected DbSet<TEntity> dbSet;
 
         public Repository(ProjectContext ctx)
         {
             _ctx = ctx;
-            dbSet = _ctx.Set<TEntity>();
+            //dbSet = _ctx.Set<TEntity>();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await _ctx.Set<TEntity>().ToListAsync();
+
         public virtual async Task CreateAsync(TEntity entity)
         {
             await _ctx.Set<TEntity>().AddAsync(entity);

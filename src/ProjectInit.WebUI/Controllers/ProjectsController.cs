@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Protocol.Core.Types;
 using ProjectInit.Core.Entities;
 using ProjectInit.Repositories.Projects;
+using ProjectInit.Repositories.Users;
 
 namespace ProjectInit.WebUI.Controllers
 {
@@ -12,7 +13,9 @@ namespace ProjectInit.WebUI.Controllers
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IUserRepository _userRepository;
+
         private readonly IWebHostEnvironment _webHostEnvironment;
+
         public ProjectsController(
             IProjectRepository projectRepository, 
             IUserRepository userRepository,
@@ -69,7 +72,6 @@ namespace ProjectInit.WebUI.Controllers
                 
                 return RedirectToAction(nameof(Index));
             }
-
 
             ViewBag.Teachers = (await _userRepository
                 .GetAllAsync())

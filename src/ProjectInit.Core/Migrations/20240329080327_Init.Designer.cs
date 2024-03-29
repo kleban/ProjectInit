@@ -12,7 +12,7 @@ using ProjectInit.Core.Context;
 namespace ProjectInit.Core.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240328150312_Init")]
+    [Migration("20240329080327_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -199,15 +199,15 @@ namespace ProjectInit.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6d4a6f23-5009-4b57-b3ff-ab6c00e37d03"),
+                            Id = new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"),
                             CourseName = "Програмування на С№",
-                            FinishDeadline = new DateTime(2024, 4, 17, 17, 3, 11, 909, DateTimeKind.Local).AddTicks(6121),
+                            FinishDeadline = new DateTime(2024, 4, 18, 10, 3, 25, 247, DateTimeKind.Local).AddTicks(4784),
                             Groups = "ТГ-1, ТГ-2",
-                            ImagePath = "/img/no_photo.jpg",
+                            ImagePath = "/img/projects/no_photo.jpg",
                             IsActive = true,
                             ProjectName = "Колективний проєкт",
-                            TeacherId = new Guid("ba7bd5c4-eb26-433f-9576-901ecbcab578"),
-                            TitleApproveDeadline = new DateTime(2024, 4, 7, 17, 3, 11, 909, DateTimeKind.Local).AddTicks(6118)
+                            TeacherId = new Guid("815f4ee2-cfb5-4004-b309-ee3869d63769"),
+                            TitleApproveDeadline = new DateTime(2024, 4, 8, 10, 3, 25, 247, DateTimeKind.Local).AddTicks(4779)
                         });
                 });
 
@@ -356,16 +356,16 @@ namespace ProjectInit.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ba10e3cd-7a3c-451f-aab8-fb0d41c43359"),
+                            Id = new Guid("e8edad47-dd29-424a-a26b-2c50987d6257"),
                             Name = "Курс у системі Moodle",
-                            ProjectId = new Guid("6d4a6f23-5009-4b57-b3ff-ab6c00e37d03"),
+                            ProjectId = new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"),
                             Url = "https://moodle.oa.edu.ua/yo"
                         },
                         new
                         {
-                            Id = new Guid("d2f1c377-72dc-4d5e-b96e-7e20fee99049"),
+                            Id = new Guid("1c4470cb-b1b4-41c7-87c4-f6e44c051432"),
                             Name = "Деталізована інформація про проєкт (Notion)",
-                            ProjectId = new Guid("6d4a6f23-5009-4b57-b3ff-ab6c00e37d03"),
+                            ProjectId = new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"),
                             Url = "https://notion.so/yo"
                         });
                 });
@@ -441,30 +441,30 @@ namespace ProjectInit.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ba7bd5c4-eb26-433f-9576-901ecbcab578"),
+                            Id = new Guid("815f4ee2-cfb5-4004-b309-ee3869d63769"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5124840e-c072-4a28-8afa-5ff809da204b",
+                            ConcurrencyStamp = "d92aa179-0746-448d-8c6d-666028427d4a",
                             Email = "admin@projects.kleban.page",
                             EmailConfirmed = true,
                             FullName = "Юрій Клебан",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@PROJECTS.KLEBAN.PAGE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIyHENlqA/7LLgieg7xQ7MxR25Eh4BF+LykEGF1FPkfX3u7YxJlaowPheD49kF+A2g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA9360r1IYw3eVIMAwtI3/9INB5CXzBI+Mbale/HdlsUXBE+PMuQGbU/o8iUFYl+0w==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "admin@projects.kleban.page"
                         },
                         new
                         {
-                            Id = new Guid("386ca99a-9e21-4846-bd51-788d724ef6f1"),
+                            Id = new Guid("4383c17e-c75b-445c-baa2-d16f24debb7c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b46d54dd-1771-4e65-959a-67ebeb925704",
+                            ConcurrencyStamp = "eefcde0b-ec41-4cf6-9acc-1aebb2372f0e",
                             Email = "teacher@projects.kleban.page",
                             EmailConfirmed = true,
                             FullName = "Іван Петренко",
                             LockoutEnabled = false,
                             NormalizedUserName = "TEACHER@PROJECTS.KLEBAN.PAGE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDBFS7mSWoFFsMoe+/ELpKvnrGAg2UM/arhk4iRwzz0s8ndJyBuK/ASWbmEhy/XJqQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJbnd+G2vc/2h625AIsm49gqljpKa56H73htHnFMwf9Z4H9sGYP9e25ngyyrqrN0ag==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "teacher@projects.kleban.page"
