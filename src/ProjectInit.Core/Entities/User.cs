@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ProjectInit.Core.Entities.Common;
+using ProjectInit.Core.Entities.Projects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjectInit.Core.Entities;
+using ProjectInit.Core.Entities.Projects;
 using System.Reflection.Emit;
 
 namespace ProjectInit.Core.Context

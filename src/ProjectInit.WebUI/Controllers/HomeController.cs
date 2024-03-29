@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ProjectInit.Core.Entities;
+using ProjectInit.Core.Entities.Projects;
 using ProjectInit.Repositories.Common;
 using ProjectInit.Repositories.Projects;
 using ProjectInit.WebUI.Models;

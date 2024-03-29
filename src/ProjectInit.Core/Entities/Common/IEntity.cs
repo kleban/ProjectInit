@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectInit.Core.Entities
+namespace ProjectInit.Core.Entities.Common
 {
     public interface IEntity<T>
     {

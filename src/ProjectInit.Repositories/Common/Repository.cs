@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectInit.Core.Context;
-using ProjectInit.Core.Entities;
+using ProjectInit.Core.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

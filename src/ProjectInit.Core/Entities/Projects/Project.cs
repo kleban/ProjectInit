@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using ProjectInit.Core.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectInit.Core.Entities
+namespace ProjectInit.Core.Entities.Projects
 {
     public class Project : IEntity<Guid>
     {
@@ -14,7 +15,7 @@ namespace ProjectInit.Core.Entities
         public string? CourseName { get; set; } = string.Empty;
         public string? ProjectName { get; set; } = string.Empty;
         public string? Groups { get; set; } = string.Empty;
-        public string? ImagePath {  get; set; } = "/img/projects/no_photo.jpg";
+        public string? ImagePath { get; set; } = "/img/projects/no_photo.jpg";
         public DateTime? TitleApproveDeadline { get; set; } = DateTime.Now.AddDays(1);
         public DateTime? FinishDeadline { get; set; } = DateTime.Now.AddDays(10);
         public bool IsActive { get; set; }

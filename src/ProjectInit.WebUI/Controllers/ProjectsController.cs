@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Protocol.Core.Types;
-using ProjectInit.Core.Entities;
+using ProjectInit.Core.Entities.Projects;
 using ProjectInit.Repositories.Projects;
 using ProjectInit.Repositories.Users;
+using ProjectInit.WebUI.Helpers;
 
 namespace ProjectInit.WebUI.Controllers
 {
@@ -17,7 +19,7 @@ namespace ProjectInit.WebUI.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public ProjectsController(
-            IProjectRepository projectRepository, 
+            IProjectRepository projectRepository,
             IUserRepository userRepository,
             IWebHostEnvironment webHostEnvironment)
         {
@@ -26,9 +28,10 @@ namespace ProjectInit.WebUI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string viewType = ViewType.Table)
         {
-            return View(await _projectRepository.GetAllAsync());
+            var data = await _projectRepository.GetAllAsync();
+            return View($"{viewType.ApplyCase(LetterCasing.Sentence)}View", data);
         }
 
         // GET: ProjectsController/Details/5
@@ -67,9 +70,9 @@ namespace ProjectInit.WebUI.Controllers
 
                     model.ImagePath = filePath;
                 }
-                
+
                 await _projectRepository.CreateAsync(model);
-                
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -122,4 +125,6 @@ namespace ProjectInit.WebUI.Controllers
             }
         }
     }
+
 }
+
