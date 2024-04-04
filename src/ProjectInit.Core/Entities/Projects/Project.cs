@@ -2,6 +2,7 @@
 using ProjectInit.Core.Entities.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,10 @@ namespace ProjectInit.Core.Entities.Projects
     public class Project : IEntity<Guid>
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+
+        [Required]
+        [Display(Name = "Назва курсу")]
+        [MinLength(5, ErrorMessage = "Мінімальна довжина поля 5 символів")]
         public string? CourseName { get; set; } = string.Empty;
         public string? ProjectName { get; set; } = string.Empty;
         public string? Groups { get; set; } = string.Empty;

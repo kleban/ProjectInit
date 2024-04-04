@@ -5,12 +5,14 @@
     var types = ViewBag.Teachers as List<SelectListItem>;
 }
 
-<h1>Новий проєкт</h1>
+<h1>Редагування проєкту: @Model.ProjectName</h1>
 
 
-<form asp-action="Create" enctype="multipart/form-data">
+<form asp-action="Edit" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
+
+    @Html.HiddenFor(model => model.Id)
 
     <div data="mb-3">
         @Html.DisplayNameFor(model => model.CourseName)

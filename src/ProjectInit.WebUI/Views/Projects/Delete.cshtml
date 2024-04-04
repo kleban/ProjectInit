@@ -1,0 +1,16 @@
+﻿@using ProjectInit.Core.Entities.Projects
+@model Project
+
+@{
+    var types = ViewBag.Teachers as List<SelectListItem>;
+}
+
+<h1>Видалення проєкту: @Model.ProjectName</h1>
+
+
+<form asp-action="Delete">
+    @Html.AntiForgeryToken() 
+    @Html.HiddenFor(model => model.Id)
+
+    <button class="btn btn-primary" type="submit">Видалити</button>
+</form>

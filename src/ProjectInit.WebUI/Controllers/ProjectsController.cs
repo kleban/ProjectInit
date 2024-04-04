@@ -40,8 +40,9 @@ namespace ProjectInit.WebUI.Controllers
             return View(await _projectRepository.GetAsync(id));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Create()
-        {
+        {            
             ViewBag.Teachers = (await _userRepository
                 .GetAllAsync())
                 .Select(x => new SelectListItem { Text = x.FullName, Value = x.Id.ToString() }).ToList();
@@ -61,7 +62,7 @@ namespace ProjectInit.WebUI.Controllers
 
                     var fileExt = Path.GetExtension(model.ImageFile.FileName);
                     var filePath = Path.Combine("/img/projects/", $"{model.Id}{fileExt}");
-                    string path = Path.Combine(wwwRootPath, filePath);
+                    string path = Path.Combine(wwwRootPath, "img\\projects\\", $"{model.Id}{fileExt}");
 
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
@@ -84,9 +85,13 @@ namespace ProjectInit.WebUI.Controllers
         }
 
         // GET: ProjectsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            return View();
+            ViewBag.Teachers = (await _userRepository
+             .GetAllAsync())
+             .Select(x => new SelectListItem { Text = x.FullName, Value = x.Id.ToString() }).ToList();
+
+            return View(await _projectRepository.GetAsync(id));
         }
 
         // POST: ProjectsController/Edit/5
@@ -105,23 +110,24 @@ namespace ProjectInit.WebUI.Controllers
         }
 
         // GET: ProjectsController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            return View();
+            return View(await _projectRepository.GetAsync(id));
         }
 
         // POST: ProjectsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(Guid id, IFormCollection form)
         {
             try
             {
+                await _projectRepository.DeleteAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", new { id = id });
             }
         }
     }

@@ -13,8 +13,7 @@ namespace ProjectInit.Core.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
-        public string Url { get; set; }
-        
+        public string Url { get; set; }        
         public Project? Project { get; set; }
         [ForeignKey(nameof(Project))]
         public Guid? ProjectId { get; set; }
