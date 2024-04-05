@@ -9,42 +9,72 @@
 
 
 <form asp-action="Create" enctype="multipart/form-data">
+
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
-    <div data="mb-3">
-        @Html.DisplayNameFor(model => model.CourseName)
-        @Html.TextBoxFor(model => model.CourseName, new { @class = "form-control" })
-        <span asp-validation-for="CourseName" class="text-danger" />
-    </div>
-
-    <div data="mb-3">
-        @Html.DisplayNameFor(model => model.ProjectName)
-        @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
-        <span asp-validation-for="ProjectName" class="text-danger" />
-    </div>
-
-    <div class="form-group mt-3">
-        @Html.DisplayNameFor(model => model.ImageFile)
-        <input asp-for="ImageFile" accept="image/*" />
-        <span asp-validation-for="ImageFile" class="text-danger"></span>
-    </div>
-  
-    <div class="mb-3">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" asp-for="IsActive">
-                <label class="form-check-label" asp-for="IsActive"></label>
+    <div class="row">
+        <div class="col-md-6">
+            <div data="mb-3">
+                @Html.DisplayNameFor(model => model.CourseName)
+                @Html.TextBoxFor(model => model.CourseName, new { @class = "form-control" })
+                <span asp-validation-for="CourseName" class="text-danger" />
+            </div>
+            <div data="mb-3">
+                @Html.DisplayNameFor(model => model.Groups)
+                @Html.TextBoxFor(model => model.Groups, new { @class = "form-control" })
+                <span asp-validation-for="Groups" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" asp-for="IsActive">
+                    <label class="form-check-label" asp-for="IsActive"></label>
+                </div>
             </div>
         </div>
-               
+        <div class="col-md-6">
+            <div data="mb-3">
+                @Html.DisplayNameFor(model => model.ProjectName)
+                @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
+                <span asp-validation-for="ProjectName" class="text-danger" />
+            </div>
 
-    <select asp-for="TeacherId" asp-items="@(types)" id="x1" class="form-control">
-        <option value="0" selected="selected">- Оберіть викладача -</option>
-    </select>
-        
-    <input type="hidden" asp-for="TeacherId" />
+            <div class="form-group mt-3">
+                @Html.DisplayNameFor(model => model.ImageFile)
+                <input asp-for="ImageFile" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                @Html.DisplayNameFor(model => model.Teacher)
+                <select asp-for="TeacherId" asp-items="@(types)" id="x1" class="form-control">
+                    <option value="0" selected="selected">- Оберіть викладача -</option>
+                </select>
 
-    <button class="btn btn-primary" type="submit">Зберегти</button>
+                <input type="hidden" asp-for="TeacherId" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <button class="btn btn-primary btn-block" style="width: 100% !important" type="submit">Зберегти</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </form>
 
 @section Scripts {
@@ -53,7 +83,7 @@
     }
 }
 
-               
+
 
 
 @*
@@ -80,4 +110,3 @@
 </textarea>
 
 *@
-               

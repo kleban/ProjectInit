@@ -16,13 +16,15 @@
 <div class="row">
     @foreach(var p in Model) 
     {
-        <div class="card mb-3 col-md-3">
+        <div class="col-md-3">
+        <div class="card mb-3">
             <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@p.ProjectName</h5>
                 <h6 class="card-subtitle">@p.CourseName</h6>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
             </div>
         </div>
     }

@@ -14,7 +14,7 @@ namespace ProjectInit.Core.Entities.Projects
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required]
+        [Required(ErrorMessage = "Поле потрібно заповнити.")]
         [Display(Name = "Назва курсу")]
         [MinLength(5, ErrorMessage = "Мінімальна довжина поля 5 символів")]
         public string? CourseName { get; set; } = string.Empty;
