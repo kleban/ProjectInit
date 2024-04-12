@@ -177,7 +177,7 @@ namespace ProjectInit.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CourseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Groups = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -317,12 +317,22 @@ namespace ProjectInit.Core.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("69bd3d08-61a0-4ad5-a911-2edd1e94fe8d"), "69bd3d08-61a0-4ad5-a911-2edd1e94fe8d", "Admin", "ADMIN" },
+                    { new Guid("85560385-029b-4fc5-aa36-52814a87df7d"), "85560385-029b-4fc5-aa36-52814a87df7d", "Teacher", "TEACHER" },
+                    { new Guid("b94cd3a9-d9f4-452f-9edc-2f93cb16280b"), "b94cd3a9-d9f4-452f-9edc-2f93cb16280b", "Student", "STUDENT" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("4383c17e-c75b-445c-baa2-d16f24debb7c"), 0, "eefcde0b-ec41-4cf6-9acc-1aebb2372f0e", "teacher@projects.kleban.page", true, "Іван Петренко", false, null, null, "TEACHER@PROJECTS.KLEBAN.PAGE", "AQAAAAIAAYagAAAAEJbnd+G2vc/2h625AIsm49gqljpKa56H73htHnFMwf9Z4H9sGYP9e25ngyyrqrN0ag==", null, false, null, false, "teacher@projects.kleban.page" },
-                    { new Guid("815f4ee2-cfb5-4004-b309-ee3869d63769"), 0, "d92aa179-0746-448d-8c6d-666028427d4a", "admin@projects.kleban.page", true, "Юрій Клебан", false, null, null, "ADMIN@PROJECTS.KLEBAN.PAGE", "AQAAAAIAAYagAAAAEA9360r1IYw3eVIMAwtI3/9INB5CXzBI+Mbale/HdlsUXBE+PMuQGbU/o8iUFYl+0w==", null, false, null, false, "admin@projects.kleban.page" }
+                    { new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f"), 0, "2c1a4ed8-1096-4b51-ae2a-0c44ac634aef", "admin@projects.kleban.page", true, "Юрій Клебан", false, null, "ADMIN@PROJECTS.KLEBAN.PAGE", "ADMIN@PROJECTS.KLEBAN.PAGE", "AQAAAAIAAYagAAAAECWSAVsX2Hq7Ihz44MIkUlxfv4IEsF3P1M/Xjkumv3FkTtt/k69t6JyfyY+p7NT+TQ==", null, false, "c240ea05-ad10-48b4-b022-2c2566b2b50a", false, "admin@projects.kleban.page" },
+                    { new Guid("c33739e3-518e-49d6-a02e-2cb9b2c616ae"), 0, "4b2be451-8b1d-46ca-85a8-796be334ef4b", "teacher@projects.kleban.page", true, "Іван Петренко", false, null, "TEACHER@PROJECTS.KLEBAN.PAGE", "TEACHER@PROJECTS.KLEBAN.PAGE", "AQAAAAIAAYagAAAAECTEaYlqhDUcW7eB77rmUkWDoOQVqjGonVL+yyqj52plxIz9GIwBSXdPNmZozxF9QQ==", null, false, "f7b65d7a-1adf-4816-88ba-c78587245c88", false, "teacher@projects.kleban.page" }
                 });
 
             migrationBuilder.InsertData(
@@ -336,17 +346,26 @@ namespace ProjectInit.Core.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("69bd3d08-61a0-4ad5-a911-2edd1e94fe8d"), new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f") },
+                    { new Guid("85560385-029b-4fc5-aa36-52814a87df7d"), new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f") }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Projects",
                 columns: new[] { "Id", "CourseName", "FinishDeadline", "Groups", "ImagePath", "IsActive", "ProjectName", "TeacherId", "TitleApproveDeadline" },
-                values: new object[] { new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"), "Програмування на С№", new DateTime(2024, 4, 18, 10, 3, 25, 247, DateTimeKind.Local).AddTicks(4784), "ТГ-1, ТГ-2", "/img/projects/no_photo.jpg", true, "Колективний проєкт", new Guid("815f4ee2-cfb5-4004-b309-ee3869d63769"), new DateTime(2024, 4, 8, 10, 3, 25, 247, DateTimeKind.Local).AddTicks(4779) });
+                values: new object[] { new Guid("92de3054-84ca-421b-bd68-c5842f8ba3f7"), "Програмування на С№", new DateTime(2024, 5, 2, 11, 27, 50, 467, DateTimeKind.Local).AddTicks(573), "ТГ-1, ТГ-2", "/img/projects/no_photo.jpg", true, "Колективний проєкт", new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f"), new DateTime(2024, 4, 22, 11, 27, 50, 467, DateTimeKind.Local).AddTicks(568) });
 
             migrationBuilder.InsertData(
                 table: "ProjectLinks",
                 columns: new[] { "Id", "Name", "ProjectId", "Url" },
                 values: new object[,]
                 {
-                    { new Guid("1c4470cb-b1b4-41c7-87c4-f6e44c051432"), "Деталізована інформація про проєкт (Notion)", new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"), "https://notion.so/yo" },
-                    { new Guid("e8edad47-dd29-424a-a26b-2c50987d6257"), "Курс у системі Moodle", new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"), "https://moodle.oa.edu.ua/yo" }
+                    { new Guid("12aef191-7892-44ab-bb29-31f72ef0db89"), "Курс у системі Moodle", new Guid("92de3054-84ca-421b-bd68-c5842f8ba3f7"), "https://moodle.oa.edu.ua/yo" },
+                    { new Guid("82d16492-fe20-481b-b029-2531379fcfae"), "Деталізована інформація про проєкт (Notion)", new Guid("92de3054-84ca-421b-bd68-c5842f8ba3f7"), "https://notion.so/yo" }
                 });
 
             migrationBuilder.CreateIndex(

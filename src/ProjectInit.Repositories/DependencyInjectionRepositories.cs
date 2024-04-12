@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using ProjectInit.Core.Context;
+using ProjectInit.Core.Entities;
 using ProjectInit.Repositories.Common;
 using ProjectInit.Repositories.Projects;
 using ProjectInit.Repositories.Users;
@@ -18,6 +20,8 @@ namespace ProjectInit.Repositories
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<UserManager<User>>();
+            services.AddScoped<RoleManager<IdentityRole<Guid>>>();
         }
     }
 }

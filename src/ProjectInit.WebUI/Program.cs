@@ -4,6 +4,7 @@ using ProjectInit.Core.Context;
 using ProjectInit.Core.Entities;
 using ProjectInit.Repositories.Common;
 using ProjectInit.Repositories;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,17 @@ builder.Services.AddDbContext<ProjectContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<User>(
+    options => { 
+        options.SignIn.RequireConfirmedAccount = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredLength = 5;
+    }).AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ProjectContext>();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRepositories();

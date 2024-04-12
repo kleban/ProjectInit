@@ -12,7 +12,7 @@ using ProjectInit.Core.Context;
 namespace ProjectInit.Core.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240329080327_Init")]
+    [Migration("20240412082755_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -51,6 +51,29 @@ namespace ProjectInit.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("69bd3d08-61a0-4ad5-a911-2edd1e94fe8d"),
+                            ConcurrencyStamp = "69bd3d08-61a0-4ad5-a911-2edd1e94fe8d",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("85560385-029b-4fc5-aa36-52814a87df7d"),
+                            ConcurrencyStamp = "85560385-029b-4fc5-aa36-52814a87df7d",
+                            Name = "Teacher",
+                            NormalizedName = "TEACHER"
+                        },
+                        new
+                        {
+                            Id = new Guid("b94cd3a9-d9f4-452f-9edc-2f93cb16280b"),
+                            ConcurrencyStamp = "b94cd3a9-d9f4-452f-9edc-2f93cb16280b",
+                            Name = "Student",
+                            NormalizedName = "STUDENT"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -137,6 +160,18 @@ namespace ProjectInit.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f"),
+                            RoleId = new Guid("69bd3d08-61a0-4ad5-a911-2edd1e94fe8d")
+                        },
+                        new
+                        {
+                            UserId = new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f"),
+                            RoleId = new Guid("85560385-029b-4fc5-aa36-52814a87df7d")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -158,57 +193,6 @@ namespace ProjectInit.Core.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("ProjectInit.Core.Entities.Project", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CourseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("FinishDeadline")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Groups")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ProjectName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("TitleApproveDeadline")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Projects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"),
-                            CourseName = "Програмування на С№",
-                            FinishDeadline = new DateTime(2024, 4, 18, 10, 3, 25, 247, DateTimeKind.Local).AddTicks(4784),
-                            Groups = "ТГ-1, ТГ-2",
-                            ImagePath = "/img/projects/no_photo.jpg",
-                            IsActive = true,
-                            ProjectName = "Колективний проєкт",
-                            TeacherId = new Guid("815f4ee2-cfb5-4004-b309-ee3869d63769"),
-                            TitleApproveDeadline = new DateTime(2024, 4, 8, 10, 3, 25, 247, DateTimeKind.Local).AddTicks(4779)
-                        });
                 });
 
             modelBuilder.Entity("ProjectInit.Core.Entities.ProjectAccessQuery", b =>
@@ -356,17 +340,69 @@ namespace ProjectInit.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e8edad47-dd29-424a-a26b-2c50987d6257"),
+                            Id = new Guid("12aef191-7892-44ab-bb29-31f72ef0db89"),
                             Name = "Курс у системі Moodle",
-                            ProjectId = new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"),
+                            ProjectId = new Guid("92de3054-84ca-421b-bd68-c5842f8ba3f7"),
                             Url = "https://moodle.oa.edu.ua/yo"
                         },
                         new
                         {
-                            Id = new Guid("1c4470cb-b1b4-41c7-87c4-f6e44c051432"),
+                            Id = new Guid("82d16492-fe20-481b-b029-2531379fcfae"),
                             Name = "Деталізована інформація про проєкт (Notion)",
-                            ProjectId = new Guid("69a4353b-99f5-4191-8ee1-8aa1be853441"),
+                            ProjectId = new Guid("92de3054-84ca-421b-bd68-c5842f8ba3f7"),
                             Url = "https://notion.so/yo"
+                        });
+                });
+
+            modelBuilder.Entity("ProjectInit.Core.Entities.Projects.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("FinishDeadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Groups")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("TitleApproveDeadline")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("92de3054-84ca-421b-bd68-c5842f8ba3f7"),
+                            CourseName = "Програмування на С№",
+                            FinishDeadline = new DateTime(2024, 5, 2, 11, 27, 50, 467, DateTimeKind.Local).AddTicks(573),
+                            Groups = "ТГ-1, ТГ-2",
+                            ImagePath = "/img/projects/no_photo.jpg",
+                            IsActive = true,
+                            ProjectName = "Колективний проєкт",
+                            TeacherId = new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f"),
+                            TitleApproveDeadline = new DateTime(2024, 4, 22, 11, 27, 50, 467, DateTimeKind.Local).AddTicks(568)
                         });
                 });
 
@@ -441,31 +477,35 @@ namespace ProjectInit.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("815f4ee2-cfb5-4004-b309-ee3869d63769"),
+                            Id = new Guid("7332ca40-47ff-4aa2-a299-fa371d81e28f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d92aa179-0746-448d-8c6d-666028427d4a",
+                            ConcurrencyStamp = "2c1a4ed8-1096-4b51-ae2a-0c44ac634aef",
                             Email = "admin@projects.kleban.page",
                             EmailConfirmed = true,
                             FullName = "Юрій Клебан",
                             LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@PROJECTS.KLEBAN.PAGE",
                             NormalizedUserName = "ADMIN@PROJECTS.KLEBAN.PAGE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA9360r1IYw3eVIMAwtI3/9INB5CXzBI+Mbale/HdlsUXBE+PMuQGbU/o8iUFYl+0w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECWSAVsX2Hq7Ihz44MIkUlxfv4IEsF3P1M/Xjkumv3FkTtt/k69t6JyfyY+p7NT+TQ==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "c240ea05-ad10-48b4-b022-2c2566b2b50a",
                             TwoFactorEnabled = false,
                             UserName = "admin@projects.kleban.page"
                         },
                         new
                         {
-                            Id = new Guid("4383c17e-c75b-445c-baa2-d16f24debb7c"),
+                            Id = new Guid("c33739e3-518e-49d6-a02e-2cb9b2c616ae"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eefcde0b-ec41-4cf6-9acc-1aebb2372f0e",
+                            ConcurrencyStamp = "4b2be451-8b1d-46ca-85a8-796be334ef4b",
                             Email = "teacher@projects.kleban.page",
                             EmailConfirmed = true,
                             FullName = "Іван Петренко",
                             LockoutEnabled = false,
+                            NormalizedEmail = "TEACHER@PROJECTS.KLEBAN.PAGE",
                             NormalizedUserName = "TEACHER@PROJECTS.KLEBAN.PAGE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJbnd+G2vc/2h625AIsm49gqljpKa56H73htHnFMwf9Z4H9sGYP9e25ngyyrqrN0ag==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECTEaYlqhDUcW7eB77rmUkWDoOQVqjGonVL+yyqj52plxIz9GIwBSXdPNmZozxF9QQ==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "f7b65d7a-1adf-4816-88ba-c78587245c88",
                             TwoFactorEnabled = false,
                             UserName = "teacher@projects.kleban.page"
                         });
@@ -537,15 +577,6 @@ namespace ProjectInit.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProjectInit.Core.Entities.Project", b =>
-                {
-                    b.HasOne("ProjectInit.Core.Entities.User", "Teacher")
-                        .WithMany("TeacherProjects")
-                        .HasForeignKey("TeacherId");
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("ProjectInit.Core.Entities.ProjectAccessQuery", b =>
                 {
                     b.HasOne("ProjectInit.Core.Entities.ProjectItem", "ProjectItem")
@@ -578,7 +609,7 @@ namespace ProjectInit.Core.Migrations
 
             modelBuilder.Entity("ProjectInit.Core.Entities.ProjectItem", b =>
                 {
-                    b.HasOne("ProjectInit.Core.Entities.Project", "Project")
+                    b.HasOne("ProjectInit.Core.Entities.Projects.Project", "Project")
                         .WithMany("Items")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -597,11 +628,20 @@ namespace ProjectInit.Core.Migrations
 
             modelBuilder.Entity("ProjectInit.Core.Entities.ProjectLink", b =>
                 {
-                    b.HasOne("ProjectInit.Core.Entities.Project", "Project")
+                    b.HasOne("ProjectInit.Core.Entities.Projects.Project", "Project")
                         .WithMany("Links")
                         .HasForeignKey("ProjectId");
 
                     b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("ProjectInit.Core.Entities.Projects.Project", b =>
+                {
+                    b.HasOne("ProjectInit.Core.Entities.User", "Teacher")
+                        .WithMany("TeacherProjects")
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("ProjectItemUser", b =>
@@ -619,18 +659,18 @@ namespace ProjectInit.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProjectInit.Core.Entities.Project", b =>
-                {
-                    b.Navigation("Items");
-
-                    b.Navigation("Links");
-                });
-
             modelBuilder.Entity("ProjectInit.Core.Entities.ProjectItem", b =>
                 {
                     b.Navigation("AccessQueries");
 
                     b.Navigation("ApproveQueries");
+                });
+
+            modelBuilder.Entity("ProjectInit.Core.Entities.Projects.Project", b =>
+                {
+                    b.Navigation("Items");
+
+                    b.Navigation("Links");
                 });
 
             modelBuilder.Entity("ProjectInit.Core.Entities.User", b =>
