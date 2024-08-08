@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjectInit.Core.Entities.Projects
@@ -24,6 +25,7 @@ namespace ProjectInit.Core.Entities.Projects
         public DateTime? TitleApproveDeadline { get; set; } = DateTime.Now.AddDays(1);
         public DateTime? FinishDeadline { get; set; } = DateTime.Now.AddDays(10);
         public bool IsActive { get; set; }
+        [JsonIgnore]
         public User? Teacher { get; set; }
 
         [ForeignKey(nameof(Teacher))]
@@ -31,7 +33,9 @@ namespace ProjectInit.Core.Entities.Projects
 
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ProjectItem> Items { get; set; } = new HashSet<ProjectItem>();
+        [JsonIgnore]
         public virtual ICollection<ProjectLink> Links { get; set; } = new HashSet<ProjectLink>();
     }
 }
